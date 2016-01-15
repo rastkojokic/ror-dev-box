@@ -9,10 +9,13 @@ Vagrant.configure('2') do |config|
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
 
-  config.vm.provision :shell, path: "https://raw.githubusercontent.com/rastkojokic/vagrant-install-scripts/master/install_scripts/pre_install.sh", keep_color: true, privileged: false
-  config.vm.provision :shell, path: "https://raw.githubusercontent.com/rastkojokic/vagrant-install-scripts/master/install_scripts/install_git.sh", keep_color: true, privileged: false
-  config.vm.provision :shell, path: "https://raw.githubusercontent.com/rastkojokic/vagrant-install-scripts/master/install_scripts/install_oh_my_zsh.sh", keep_color: true, privileged: false
-  config.vm.provision :shell, path: "https://raw.githubusercontent.com/rastkojokic/vagrant-install-scripts/master/install_scripts/install_vim.sh", keep_color: true, privileged: false
+  remote_script_repo = "https://raw.githubusercontent.com/rastkojokic/vagrant-install-scripts/master/install_scripts/"
+
+  config.vm.provision :shell, path: "#{remote_script_repo}pre_install.sh", keep_color: true, privileged: false
+  config.vm.provision :shell, path: "#{remote_script_repo}install_git.sh", keep_color: true, privileged: false
+  config.vm.provision :shell, path: "#{remote_script_repo}install_oh_my_zsh.sh", keep_color: true, privileged: false
+  config.vm.provision :shell, path: "#{remote_script_repo}install_vim.sh", keep_color: true, privileged: false
+  config.vm.provision :shell, path: "#{remote_script_repo}install_node.sh", keep_color: true, privileged: false
 
   config.vm.provision :shell, path: "bootstrap/install_ror.sh", keep_color: true, privileged: false
 end
