@@ -3,8 +3,10 @@ Vagrant.configure('2') do |config|
   config.vm.hostname = "ror-dev-box"
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
+    v.memory = 2048
   end
+
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
 
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
@@ -18,4 +20,6 @@ Vagrant.configure('2') do |config|
   config.vm.provision :shell, path: "#{remote_script_repo}install_node.sh", keep_color: true, privileged: false
 
   config.vm.provision :shell, path: "bootstrap/install_ror.sh", keep_color: true, privileged: false
+
+  config.vm.synced_folder "shared_folder/", "/home/vagrant/shared_folder"
 end
